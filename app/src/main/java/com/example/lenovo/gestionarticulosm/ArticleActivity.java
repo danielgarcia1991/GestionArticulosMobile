@@ -7,14 +7,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
-public class CategoryActivity extends AppCompatActivity {
+public class ArticleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
+        setContentView(R.layout.activity_article);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -22,22 +21,21 @@ public class CategoryActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast toast1 = Toast.makeText(getApplicationContext(), "Debe diligenciar todos los campos", Toast.LENGTH_SHORT);
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
 
-    public void onVerCategoria(View view)
+    public void verArticulos(View view)
     {
-        Intent intent = new Intent(this, DetalleCategoryActivity.class);
+        Intent intent = new Intent(this, DetalleArticleActivity.class);
         startActivity(intent);
     }
 
     public void onAgregar(View view)
     {
-        Intent intent = new Intent(this, AgregarCategoryActivity.class);
+        Intent intent = new Intent(this, AgregarArticleActivity.class);
         startActivity(intent);
     }
 

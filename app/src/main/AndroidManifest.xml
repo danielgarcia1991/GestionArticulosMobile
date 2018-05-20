@@ -21,7 +21,14 @@
             android:name=".CategoryActivity"
             android:label="@string/title_activity_category"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DetalleCategoryActivity"></activity>
+        <activity android:name=".DetalleCategoryActivity" />
+        <activity android:name=".AgregarCategoryActivity" />
+        <activity
+            android:name=".ArticleActivity"
+            android:label="@string/title_activity_article"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DetalleArticleActivity" />
+        <activity android:name=".AgregarArticleActivity"></activity>
     </application>
 
 </manifest>

@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onArticulos(View view)
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ArticleActivity.class);
         startActivity(intent);
     }
 }

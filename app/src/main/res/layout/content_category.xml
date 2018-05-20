@@ -30,4 +30,17 @@
         android:text="CategoriaUno"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="138dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onAgregar"
+        android:text="Agregar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.832"
+        tools:layout_editor_absoluteX="162dp" />
 </android.support.constraint.ConstraintLayout>
