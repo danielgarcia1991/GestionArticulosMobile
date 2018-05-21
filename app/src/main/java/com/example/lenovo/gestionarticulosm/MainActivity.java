@@ -4,7 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,9 +18,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        String id_user = intent.getStringExtra(Login.ID_USER);
+
+
+        //Intent intent = getIntent();
+        //String id_user = intent.getStringExtra(Login.ID_USER);
+
+        //Intent intent = new Intent(this, CategoryActivity.class);
+        //startActivity(intent);
+
     }
+
+
+
+
+
+
 
     public void onCategorias(View view)
     {

@@ -11,10 +11,12 @@ public interface ApiService {
 
 
     @GET("api/api_registroelementos")
-    Call<CategoryResponse> getCategories(@Query("id") String id,
-                                       @Query("name") String name,
-                                       @Query("description") String description);
+    Call<CategoryResponse> getCategories();
 
+    @POST("api/api_registroelementos")
+    Call<CategoryResponse> postAddCategories(@Query("name") String name,
+                                 @Query("description") String description,
+                                 @Query("user_id") String user_id);
 
 }
 
