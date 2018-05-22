@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,6 +24,8 @@ import retrofit2.Response;
 
 public class CategoryActivity extends AppCompatActivity {
 
+    List<String> listCategoriesCode = new ArrayList<String>();
+    public static final String ID_CATEGORY = "";
     ListView listCategories;
 
     @Override
@@ -80,16 +83,30 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void createListViewCategores(ArrayList<Category> categories){
 
-        List<String> listProductsName = new ArrayList<String>();
+        List<String> listCategoriesName = new ArrayList<String>();
+
         for(Category c : categories){
-            listProductsName.add(c.getName());
+            this.listCategoriesCode.add(c.getId());
+            listCategoriesName.add(c.getName());
         }
 
         listCategories = (ListView)findViewById(R.id.listVC);
-        ArrayAdapter<String> ArrayProducts = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listProductsName);
+        ArrayAdapter<String> ArrayProducts = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listCategoriesName);
         listCategories.setAdapter(ArrayProducts);
+
+        listCategories.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                callDetalleCategoryActivity(listCategoriesCode.get(position));
+            }
+        });
     }
 
+    private void  callDetalleCategoryActivity(String position){
+        Intent intent = new Intent(this, DetalleCategoryActivity.class);
+        intent.putExtra(ID_CATEGORY, position);
+        startActivity(intent);
+    }
 
     public void onVerCategoria(View view)
     {
