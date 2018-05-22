@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.lenovo.gestionarticulosm.models.Article;
+import com.example.lenovo.gestionarticulosm.models.ArticleStatus;
 import com.example.lenovo.gestionarticulosm.models.Category;
 import com.example.lenovo.gestionarticulosm.models.CategoryStatus;
 
@@ -46,11 +47,11 @@ public class DetalleArticleActivity extends AppCompatActivity {
     private void getArticle(String id_category) {
 
         Call<Article> call = ApiAdapter.getApiService().getArticle();
-        call.enqueue( new DetalleArticleActivity.ArticleDelCallback());
+        call.enqueue( new DetalleArticleActivity.ArticleCallback());
     }
 
 
-    class ArticleDelCallback implements Callback<Article> {
+    class ArticleCallback implements Callback<Article> {
 
         @Override
         public void onResponse(Call<Article> call, Response<Article> response) {
@@ -84,5 +85,42 @@ public class DetalleArticleActivity extends AppCompatActivity {
     public void onEliminar(View view)
     {
         //Realiza la eliminacion del articulo actual
+        getDeleteArticle(this.idCategory);
+    }
+
+    private void getDeleteArticle(String id_category) {
+
+        Call<ArticleStatus> call = ApiAdapter.getApiService().getDeleteArticle();
+        call.enqueue( new DetalleArticleActivity.ArticleDelCallback());
+    }
+
+    class ArticleDelCallback implements Callback<ArticleStatus> {
+
+        @Override
+        public void onResponse(Call<ArticleStatus> call, Response<ArticleStatus> response) {
+
+
+            if(response.isSuccessful()){
+                ArticleStatus articleStatus = response.body();
+                if(articleStatus.isStatus() == true){
+                    Toast.makeText(DetalleArticleActivity.this, "Articulo eliminado con exito! ", Toast.LENGTH_SHORT).show();
+                    callArticles();
+                }
+            }else{
+                Toast.makeText(DetalleArticleActivity.this, "Error en el formato de respuesta: " + response.code(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<ArticleStatus> call, Throwable t) {
+
+
+        }
+    }
+
+    private void callArticles(){
+
+        Intent intent = new Intent(this, ArticleActivity.class);
+        startActivity(intent);
     }
 }

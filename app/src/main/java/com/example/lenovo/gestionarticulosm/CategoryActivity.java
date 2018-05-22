@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ import retrofit2.Response;
 
 public class CategoryActivity extends AppCompatActivity {
 
+    private final static String TAG = "CategoryActivity";
     List<String> listCategoriesCode = new ArrayList<String>();
     public static final String ID_CATEGORY = "";
     ListView listCategories;
@@ -35,7 +37,10 @@ public class CategoryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getCategories("1");
+        Intent intent = getIntent();
+        String id_user = intent.getStringExtra(Login.ID_USER);
+        getCategories();
+        Toast toast1 = Toast.makeText(getApplicationContext(), "Debe diligenciar todos los campos: " + id_user , Toast.LENGTH_SHORT);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,12 +55,13 @@ public class CategoryActivity extends AppCompatActivity {
 
     }
 
-    private void getCategories(String id_user) {
+    private void getCategories() {
 
 
 
         //Toast toast1 = Toast.makeText(getApplicationContext(), "Debe diligenciar todos los campos", Toast.LENGTH_SHORT);
-        Call<CategoryResponse> call = ApiAdapter.getApiService().getCategories();
+        String user_id = JsonPreferences.getInstance(getApplicationContext()).getUser();
+        Call<CategoryResponse> call = ApiAdapter.getApiService().getCategories(user_id);
         call.enqueue( new CategoryActivity.CategoryCallback());
     }
 
@@ -64,11 +70,12 @@ public class CategoryActivity extends AppCompatActivity {
         @Override
         public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
 
-
+            Log.d(TAG, "Callback: successful");
             if(response.isSuccessful()){
                 CategoryResponse categoryResponse = response.body();
+                Log.d(TAG, response.body().toString());
                 createListViewCategores(categoryResponse.getCategories());
-                //Toast.makeText(CategoryActivity.this, "sisas:" + categoryResponse.getCategories() , Toast.LENGTH_SHORT).show();
+
             }else{
                 Toast.makeText(CategoryActivity.this, "Error en el formato de respuesta: " + response.code(), Toast.LENGTH_SHORT).show();
             }
@@ -77,7 +84,8 @@ public class CategoryActivity extends AppCompatActivity {
         @Override
         public void onFailure(Call<CategoryResponse> call, Throwable t) {
 
-
+            Log.d(TAG, "Callback: FAILURE");
+            t.printStackTrace();
         }
     }
 

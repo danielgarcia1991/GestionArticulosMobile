@@ -13,6 +13,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String ID_USER = "";
+    private String user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,29 +23,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //Intent intent = getIntent();
-        //String id_user = intent.getStringExtra(Login.ID_USER);
-
-        //Intent intent = new Intent(this, CategoryActivity.class);
-        //startActivity(intent);
+        Intent intent = getIntent();
+        String id_user = intent.getStringExtra(Login.ID_USER);
+        user = id_user;
 
     }
-
-
-
-
-
 
 
     public void onCategorias(View view)
     {
         Intent intent = new Intent(this, CategoryActivity.class);
+        intent.putExtra(ID_USER, user);
         startActivity(intent);
     }
 
     public void onArticulos(View view)
     {
         Intent intent = new Intent(this, ArticleActivity.class);
+        intent.putExtra(ID_USER, user);
         startActivity(intent);
     }
 }
