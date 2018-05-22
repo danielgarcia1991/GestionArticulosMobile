@@ -98,6 +98,8 @@ public class CategoryActivity extends AppCompatActivity {
             listCategoriesName.add(c.getName());
         }
 
+
+
         listCategories = (ListView)findViewById(R.id.listVC);
         ArrayAdapter<String> ArrayProducts = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listCategoriesName);
         listCategories.setAdapter(ArrayProducts);

@@ -4,11 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.lenovo.gestionarticulosm.models.Category;
 import com.example.lenovo.gestionarticulosm.models.CategoryStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +25,9 @@ public class AgregarCategoryActivity extends AppCompatActivity {
     private EditText nameTc;
     private EditText descriptionTc;
     String id_user;
+    ListView listCategories;
+
+    List<String> listCategoriesCode = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,37 @@ public class AgregarCategoryActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    public void poblarSpinnerCategories(ArrayList<Category> categories){
+
+        List<String> listCategoriesName = new ArrayList<String>();
+
+        for(Category c : categories){
+            this.listCategoriesCode.add(c.getId());
+            listCategoriesName.add(c.getName());
+        }
+    }
+
+    private void createListViewCategores(ArrayList<Category> categories){
+
+        List<String> listCategoriesName = new ArrayList<String>();
+
+        for(Category c : categories){
+            this.listCategoriesCode.add(c.getId());
+            listCategoriesName.add(c.getName());
+        }
+
+        listCategories = (ListView)findViewById(R.id.listVC);
+        ArrayAdapter<String> ArrayProducts = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listCategoriesName);
+        listCategories.setAdapter(ArrayProducts);
+
+        /*listCategories.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                callDetalleCategoryActivity(listCategoriesCode.get(position));
+            }
+        });*/
     }
 
     private void callCategories(){

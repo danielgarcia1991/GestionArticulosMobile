@@ -46,7 +46,7 @@ public class AgregarArticleActivity extends AppCompatActivity {
     private void addArticle(String name, String description, String type, String dateExp, String km, String id_user) {
 
         String user_id = JsonPreferences.getInstance(getApplicationContext()).getUser();
-        Call<ArticleStatus> call = ApiAdapter.getApiService().postAddArticles(name, description, km, dateExp, type, user_id, "3");
+        Call<ArticleStatus> call = ApiAdapter.getApiService().postAddArticles(name, description, km, dateExp, type, user_id, "14");
         call.enqueue( new AgregarArticleActivity.ArticleCallback());
     }
 
