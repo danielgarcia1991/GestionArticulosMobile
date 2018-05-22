@@ -20,26 +20,26 @@ public interface ApiService {
     @GET("api/api_registroelementos/{id_user}")
     Call<CategoryResponse> getCategories(@Path("id_user") String id_user);
 
-    @GET("api/api_aregistroelementos/3")
-    Call<Category> getCategory();
+    @GET("api/api_aregistroelementos/{id_category}")
+    Call<Category> getCategory(@Path("id_category") String id_category);
 
     @POST("api/api_registroelementos")
     Call<CategoryStatus> postAddCategories(@Query("name") String name,
                                            @Query("description") String description,
                                            @Query("user_id") String user_id);
 
-    @DELETE("api/api_registroelementos/7")
-    Call<CategoryStatus> getDeleteCategory();
+    @DELETE("api/api_registroelementos/{id_category}")
+    Call<CategoryStatus> getDeleteCategory(@Path("id_category") String id_category);
 
 
 
-    @GET("api/api_registroarticulos/1")
-    Call<ArticleResponse> getArticles();
+    @GET("api/api_registroarticulos/{id_user}")
+    Call<ArticleResponse> getArticles(@Path("id_user") String id_user);
 
-    @GET("api/api_aregistroarticulos/1")
-    Call<Article> getArticle();
+    @GET("api/api_aregistroarticulos/{id_article}")
+    Call<Article> getArticle(@Path("id_article") String id_article);
 
-    @DELETE("api/api_registroarticulos/1")
+    @DELETE("api/api_registroarticulos/2")
     Call<ArticleStatus> getDeleteArticle();
 
     @POST("api/api_registroarticulos")

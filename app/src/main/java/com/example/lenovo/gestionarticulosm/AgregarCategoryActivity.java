@@ -37,7 +37,8 @@ public class AgregarCategoryActivity extends AppCompatActivity {
 
     private void addCategory(String name, String description, String id_user) {
 
-        Call<CategoryStatus> call = ApiAdapter.getApiService().postAddCategories(name, description, id_user);
+        String user_id = JsonPreferences.getInstance(getApplicationContext()).getUser();
+        Call<CategoryStatus> call = ApiAdapter.getApiService().postAddCategories(name, description, user_id);
         call.enqueue( new AgregarCategoryActivity.CategoryCallback());
     }
 

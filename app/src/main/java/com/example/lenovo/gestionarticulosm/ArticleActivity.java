@@ -56,8 +56,8 @@ public class ArticleActivity extends AppCompatActivity {
 
 
 
-        Toast toast1 = Toast.makeText(getApplicationContext(), "Debe diligenciar todos los campos", Toast.LENGTH_SHORT);
-        Call<ArticleResponse> call = ApiAdapter.getApiService().getArticles();
+        String user_id = JsonPreferences.getInstance(getApplicationContext()).getUser();
+        Call<ArticleResponse> call = ApiAdapter.getApiService().getArticles(user_id);
         call.enqueue( new ArticleActivity.ArticleCallback());
     }
 

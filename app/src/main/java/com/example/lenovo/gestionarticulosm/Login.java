@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
             //verificacion del web service para saber si llama el menu o no
 
             getUser(user);
-            callMain(1);
+
         }
 
     }
@@ -61,9 +61,15 @@ public class Login extends AppCompatActivity {
             Log.d(TAG, "Callback: successful");
             if(response.isSuccessful()){
 
-                LoginResponse login = response.body();
-                Log.d(TAG, response.body().toString());
-                JsonPreferences.getInstance(getApplicationContext()).setUser(login.getUsers());
+                if (response.code() == 200) {
+                    LoginResponse login = response.body();
+                    Log.d(TAG, response.body().toString());
+                    JsonPreferences.getInstance(getApplicationContext()).setUser(login.getUsers());
+                    callMain(1);
+                }else{
+                    callNotLogin();
+
+                }
 
             }else{
                 Toast.makeText(Login.this, "Error en el formato de respuesta: " + response.code(), Toast.LENGTH_SHORT).show();
@@ -75,6 +81,11 @@ public class Login extends AppCompatActivity {
 
             Toast.makeText(Login.this, "Error en el formato de respuesta: ", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void callNotLogin() {
+
+        Toast.makeText(Login.this, "Verifique su usuario y contraseña", Toast.LENGTH_SHORT).show();
     }
 
     private void callMain(int idUser) {

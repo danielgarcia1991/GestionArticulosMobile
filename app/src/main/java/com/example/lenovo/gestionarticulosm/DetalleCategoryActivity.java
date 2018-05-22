@@ -42,7 +42,7 @@ public class DetalleCategoryActivity extends AppCompatActivity {
 
     private void getCategory(String id_category) {
 
-        Call<Category> call = ApiAdapter.getApiService().getCategory();
+        Call<Category> call = ApiAdapter.getApiService().getCategory(id_category);
         call.enqueue( new DetalleCategoryActivity.CategoryCallback());
     }
 
@@ -85,7 +85,7 @@ public class DetalleCategoryActivity extends AppCompatActivity {
 
     private void getDeleteCategory(String id_category) {
 
-        Call<CategoryStatus> call = ApiAdapter.getApiService().getDeleteCategory();
+        Call<CategoryStatus> call = ApiAdapter.getApiService().getDeleteCategory(id_category);
         call.enqueue( new DetalleCategoryActivity.CategoryDelCallback());
     }
 

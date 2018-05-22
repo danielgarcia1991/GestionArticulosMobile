@@ -3,6 +3,7 @@ package com.example.lenovo.gestionarticulosm;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ import retrofit2.Response;
 public class DetalleArticleActivity extends AppCompatActivity {
 
     private String idCategory;
+
+    private final static String TAG = "DetalleArticleActivity";
 
     private EditText nameTa;
     private EditText descriptionTa;
@@ -46,7 +49,7 @@ public class DetalleArticleActivity extends AppCompatActivity {
 
     private void getArticle(String id_category) {
 
-        Call<Article> call = ApiAdapter.getApiService().getArticle();
+        Call<Article> call = ApiAdapter.getApiService().getArticle(id_category);
         call.enqueue( new DetalleArticleActivity.ArticleCallback());
     }
 
@@ -56,10 +59,10 @@ public class DetalleArticleActivity extends AppCompatActivity {
         @Override
         public void onResponse(Call<Article> call, Response<Article> response) {
 
-
+            Log.d(TAG, "Callback: successful");
             if(response.isSuccessful()){
                 Article article = response.body();
-
+                Log.d(TAG, response.body().toString());
                 nameTa.setText(article.getName());
                 descriptionTa.setText(article.getDescription());
                 editText3.setText(article.getType());
